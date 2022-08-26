@@ -1,0 +1,51 @@
+phythub:
+  main-spawn: lobby
+  prefix: '&9&lPhytHub &8&l⊱ &r'
+  $mysql:
+    driver: "com.mysql.cj.jdbc.Driver"
+    address: "localhost:3306"
+    database: "phythub"
+    username: "mango"
+    password: "password"
+    useSSL: false
+  status:
+    on: 'On'
+    of: 'Off'
+    enable: 'Enable'
+    disable: 'Disable'
+  tools:
+    player-visibility:
+      display-name: '&aVisibility'
+      material: PAPER
+      slot: 8
+      lore:
+        - '&7Change visibility mode...'
+        - ''
+  $commands:
+    help1:
+      mode: send-message
+      command: helpmeplease
+      ask-permission: false
+      permission: phythub.help
+      message:
+        - ""
+        - "&7Our website: ourwebsite.com"
+        - ""
+    aliases1:
+      mode: run-command
+      command: examaliases
+      ask-permission: false
+      permission: phythub.fuser
+      commands:
+        - "say Hello !"
+  messages:
+    console: 'Hey ! I am sorry but you cannot do that from console !'
+    plugin-reloaded: '<prefix>&7Plugin reloaded...'
+    helps:
+      management:
+        - ''
+        - '&9&lPhytHub &8: &fHelp messages'
+        - '   &f/Phythub reload'
+        - '   &f/Phythub setspawn'
+        - '   &f/Phythub spawn'
+        - ''

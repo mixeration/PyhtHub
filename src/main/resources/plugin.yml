@@ -1,0 +1,10 @@
+name: PhytHub
+version: '${project.version}'
+main: eu.mixeration.phythub.PhytHub
+api-version: 1.16
+prefix: PhytHub
+authors: [ Mixeration ]
+description: PhytHub, Minecraft fakelobby management system.
+commands:
+  PhytHub:
+    description: PhytHub plugin management command.
