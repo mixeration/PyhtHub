@@ -22,10 +22,10 @@ public class PlayerVision implements Listener {
     @EventHandler
     public void visionItemClickEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if(event.getAction() == Action.RIGHT_CLICK_AIR && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if(event.getItem().getType() == Material.getMaterial(PluginConfig.getConfig().getString("phythub.tools.player-visibility.material"))) {
                 if(event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&',PluginConfig.getConfig().getString("phythub.tools.player-visibility.display-name")))) {
-                    if(canSee.get(player.getUniqueId()) == null && !canSee.get(player.getUniqueId())) {
+                    if(canSee.get(player.getUniqueId()) == null || !canSee.get(player.getUniqueId())) {
                         canSee.put(player.getUniqueId(), true);
                         for(Player onlines : Bukkit.getOnlinePlayers()) {
                             player.canSee(onlines);

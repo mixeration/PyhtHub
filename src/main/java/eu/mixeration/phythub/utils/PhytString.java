@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class PhytString implements PhytMessenger {
 
-    public String getPrefix(){return PluginConfig.getConfig().getString("phythub.prefix");}
+    public String getPrefix(){return ChatColor.translateAlternateColorCodes('&', PluginConfig.getConfig().getString("phythub.prefix"));}
 
     @Override
     public void send(Player player, String message) {

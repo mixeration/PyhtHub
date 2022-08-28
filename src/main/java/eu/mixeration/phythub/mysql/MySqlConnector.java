@@ -85,7 +85,7 @@ public class MySqlConnector extends DataAdapter {
 
         this.hikariDataSource = new HikariDataSource(dbConfig);
 
-        plugin.getLogger().info("Mysql Datasource ready!");
+        plugin.getLogger().info("Mysql datasource ready!");
     }
 
     private void checkTables(){
@@ -93,9 +93,9 @@ public class MySqlConnector extends DataAdapter {
             String $0sql = "CREATE TABLE IF NOT EXISTS phytSql (\n" +
                     "    uuid VARCHAR(255) NOT NULL PRIMARY KEY,\n" +
                     "    player VARCHAR(255) NOT NULL,\n" +
-                    "    firstjoin VARCHAR(255) NOT NULL,\n" +
-                    "    lastjoin VARCHAR(255) NOT NULL,\n" +
-                    "    ismod INT" +
+                    "    coin INT NOT NULL,\n" +
+                    "    lastplay INT NOT NULL,\n" +
+                    "    firstplay INT" +
                     ")  ENGINE=INNODB;";
             String $1sql = "CREATE TABLE IF NOT EXISTS phytData (\n" +
                     "    world VARCHAR(255) NOT NULL PRIMARY KEY,\n" +
@@ -103,7 +103,8 @@ public class MySqlConnector extends DataAdapter {
                     "    y VARCHAR(255) NOT NULL,\n" +
                     "    z VARCHAR(255) NOT NULL,\n" +
                     "    yaw VARCHAR(255),\n" +
-                    "    pitch VARCHAR(255) NOT NULL" +
+                    "    pitch VARCHAR(255) NOT NULL,\n" +
+                    "    phytid VARCHAR(255) NOT NULL" +
                     ")  ENGINE=INNODB;";
             statement.executeUpdate($0sql);
             statement.executeUpdate($1sql);
@@ -127,32 +128,6 @@ public class MySqlConnector extends DataAdapter {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static void createNewData(final UUID uuid, Player player) {
-        try {
-            PreparedStatement statement = hikariDataSource.getConnection()
-                    .prepareStatement("SELECT * FROM phytSql WHERE uuid=?");
-            statement.setString(1, uuid.toString());
-            ResultSet results = statement.executeQuery();
-            results.next();
-            System.out.print(1);
-            if (playerExists(uuid) != true) {
-                PreparedStatement insert = hikariDataSource.getConnection()
-                        .prepareStatement("INSERT INTO phytSql (uuid,player,balance,coin,ingame,playedmatches) VALUES (?,?,?,?,?,?)");
-                insert.setString(1, uuid.toString());
-                insert.setString(2, player.getName());
-                insert.setInt(3, 0);
-                insert.setInt(4, 0);
-                insert.setInt(5, 0);
-                insert.setInt(6, 0);
-                insert.executeUpdate();
-
-                Bukkit.getLogger().warning("Data created for " + player.getName());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
 }

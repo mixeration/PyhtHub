@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.UUID;
 
 public class PhytSQL {
@@ -30,6 +31,7 @@ public class PhytSQL {
         return false;
     }
 
+    @Deprecated
     public static void createPlayer(final UUID uuid, Player player) {
         try {
             PreparedStatement statement = MySqlConnector.getConnection()
@@ -38,15 +40,16 @@ public class PhytSQL {
             ResultSet results = statement.executeQuery();
             results.next();
             System.out.print(1);
+            Date date = new Date();
+            String toDay = date.getMinutes()+":"+date.getHours()+":"+date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
             if (playerExists(uuid) != true) {
                 PreparedStatement insert = MySqlConnector.getConnection()
-                        .prepareStatement("INSERT INTO phytSql (uuid,player,balance,coin,ingame,playedmatches) VALUES (?,?,?,?,?,?)");
+                        .prepareStatement("INSERT INTO phytSql (uuid,player,coin,lastplay,firstplay) VALUES (?,?,?,?,?)");
                 insert.setString(1, uuid.toString());
                 insert.setString(2, player.getName());
                 insert.setInt(3, 0);
-                insert.setInt(4, 0);
-                insert.setInt(5, 0);
-                insert.setInt(6, 0);
+                insert.setString(4, toDay);
+                insert.setString(5, toDay);
                 insert.executeUpdate();
 
                 Bukkit.getLogger().warning("Data created for " + player.getName());

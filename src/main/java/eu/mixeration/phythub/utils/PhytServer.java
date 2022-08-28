@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 public class PhytServer {
 
     public String getServerVersion(){
-        return Bukkit.getServer().getVersion();
+        return Bukkit.getServer().getBukkitVersion();
     }
 
 }

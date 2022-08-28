@@ -1,6 +1,7 @@
 phythub:
   main-spawn: lobby
   prefix: '&9&lPhytHub &8&l⊱ &r'
+  storage: mysql
   $mysql:
     driver: "com.mysql.cj.jdbc.Driver"
     address: "localhost:3306"
@@ -41,6 +42,9 @@ phythub:
   messages:
     console: 'Hey ! I am sorry but you cannot do that from console !'
     plugin-reloaded: '<prefix>&7Plugin reloaded...'
+    spawn-not-found: '<prefix>&7Spawn not found.'
+    spawn-selected: '<prefix>&7Spawn selected...'
+    spawn-already-selected: '<prefix>&7Spawn already selected.'
     helps:
       management:
         - ''
